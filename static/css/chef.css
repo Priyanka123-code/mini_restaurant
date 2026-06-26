@@ -1,0 +1,93 @@
+.navbar {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+}
+.navbar{
+    background: linear-gradient(to right,
+        #b4662e,
+        #05434c,
+        #cc412c
+    ) 
+    }
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.chef-info {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.service-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.services h1 {
+    font-size: 40px;
+}
+
+.service-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+}
+
+
+.service-card {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    --tw-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+    --tw-shadow-colored: 0 4px 8px 0 var(--tw-shadow-color), 0 6px 20px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    line-height: 40px;
+}
+
+.service-card img {
+    position: cover;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+.service-card p {
+    font-size: 14px;
+    padding: 0 20px;
+    margin: 20px;
+}
+
+.service-card h3 {
+
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+#chef-info {
+    text-align: center;
+    margin-top: 50px;
+}
+

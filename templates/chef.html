@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Our Chefs{% endblock %}
+
+{% block content %}
+<section class="page-hero compact-hero chef-hero">
+    <p class="eyebrow">Private chef booking</p>
+    <h1>Meet the chefs behind the table.</h1>
+    <p>Book a chef for a special menu, private dinner, or signature dish prepared with care.</p>
+</section>
+
+<div class="content-page showcase-grid">
+    {% for chef in chefs %}
+    <article class="container1">
+        <img src="{{ chef.image.url }}" alt="{{ chef.name }}">
+        <h3>{{ chef.name }}</h3>
+        <p class="meta">{{ chef.cuisine }}</p>
+        <p><strong>Signature:</strong> {{ chef.signature_dish }}</p>
+        {% if chef.bio %}<p>{{ chef.bio|slice:":110" }}...</p>{% endif %}
+        <a href="{% url 'book_chef' chef.id %}">
+            <button class="right">Book This Chef</button>
+        </a>
+    </article>
+    {% empty %}
+    <article class="container1">
+        <img src="{% static 'images/san.jpeg' %}" alt="Chef Sanjeev Kapoor">
+        <h3>Chef Sanjeev Kapoor</h3>
+        <p class="meta">Italian</p>
+        <p><strong>Signature:</strong> Shaam Savera</p>
+        <a href="{% url 'book_table' %}"><button class="right">Book a Table</button></a>
+    </article>
+    <article class="container1">
+        <img src="{% static 'images/venkatesh.avif' %}" alt="Chef Venkatesh Bhatt">
+        <h3>Chef Venkatesh Bhatt</h3>
+        <p class="meta">South Indian</p>
+        <p><strong>Signature:</strong> Poondu kuzhambu</p>
+        <a href="{% url 'book_table' %}"><button class="right">Book a Table</button></a>
+    </article>
+    <article class="container1">
+        <img src="{% static 'images/brar.jpg' %}" alt="Chef Ranveer Brar">
+        <h3>Chef Ranveer Brar</h3>
+        <p class="meta">Seafood</p>
+        <p><strong>Signature:</strong> Dorra Kebab</p>
+        <a href="{% url 'book_table' %}"><button class="right">Book a Table</button></a>
+    </article>
+    <article class="container1">
+        <img src="{% static 'images/Chef Koushik.jpg' %}" alt="Chef Koushik">
+        <h3>Chef Koushik S. A.K.A.</h3>
+        <p class="meta">Pan-Asian</p>
+        <p><strong>Signature:</strong> Paneer tikka pizza</p>
+        <a href="{% url 'book_table' %}"><button class="right">Book a Table</button></a>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

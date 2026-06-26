@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mini Restaurant{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-content">
+        <p class="eyebrow">Bengaluru dining, made memorable</p>
+        <h1>Reserve a beautiful table for every occasion.</h1>
+        <p>Curated restaurants, celebrated chefs, and warm hospitality in one elegant booking experience.</p>
+        <div class="hero-actions">
+            <a href="{% url 'book_table' %}" class="btn btn-primary">Book a Table</a>
+            <a href="{% url 'restaurants' %}" class="btn btn-secondary">Explore Restaurants</a>
+        </div>
+    </div>
+</div>
+
+<section class="intro-panel" aria-label="Restaurant highlights">
+    <div>
+        <span class="stat">24+</span>
+        <p>partner dining rooms</p>
+    </div>
+    <div>
+        <span class="stat">4.8</span>
+        <p>guest rating</p>
+    </div>
+    <div>
+        <span class="stat">15 min</span>
+        <p>average confirmation</p>
+    </div>
+</section>
+
+<section class="slider-wrapper">
+    <div class="section-heading">
+        <p class="eyebrow">The mood</p>
+        <h2>Food that looks as good as the evening feels.</h2>
+    </div>
+    <div class="slider">
+        <img src="{% static 'images/p1.png' %}" alt="Food 1">
+        <img src="{% static 'images/p2.jpg' %}" alt="Food 2">
+        <img src="{% static 'images/p3.jpg' %}" alt="Food 3">
+        <img src="{% static 'images/p4.jpg' %}" alt="Food 4">
+        <img src="{% static 'images/p7.jpg' %}" alt="Signature platter">
+        <img src="{% static 'images/p6.jpg' %}" alt="Dessert">
+    </div>
+</section>
+
+<section class="story-section">
+    <img src="{% static 'images/pp1.jpg' %}" alt="Masala dosa served with chutney">
+    <div>
+        <p class="eyebrow">From the reference frontend</p>
+        <h2>Table reservations and chef bookings in one place.</h2>
+        <p>Plan a family dinner, birthday, date night, or a private chef experience without jumping between calls and pages.</p>
+        <a href="{% url 'chefs' %}" class="btn btn-primary">Meet the Chefs</a>
+    </div>
+</section>
+
+<div class="popular-dishes">
+    <div class="section-heading">
+        <p class="eyebrow">Chef favorites</p>
+        <h2>Our Signature Dishes</h2>
+    </div>
+    <div class="dish-grid">
+        <article class="dish-card">
+            <span>01</span>
+            <h3>Masala Dosa</h3>
+            <p>Crisp, golden, and served with fragrant chutneys.</p>
+        </article>
+        <article class="dish-card">
+            <span>02</span>
+            <h3>Hyderabadi Biryani</h3>
+            <p>Slow-cooked rice, spices, and tender layered flavor.</p>
+        </article>
+        <article class="dish-card">
+            <span>03</span>
+            <h3>Butter Chicken</h3>
+            <p>Silky tomato gravy with soft naan on the side.</p>
+        </article>
+        <article class="dish-card">
+            <span>04</span>
+            <h3>Filter Coffee</h3>
+            <p>A rich South Indian finish to a perfect meal.</p>
+        </article>
+    </div>
+</div>
+{% endblock %}

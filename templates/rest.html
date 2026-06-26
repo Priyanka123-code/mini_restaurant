@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+<section class="page-hero compact-hero">
+    <p class="eyebrow">Restaurants</p>
+    <h1>Choose the perfect dining room.</h1>
+    <p>Browse cozy South Indian kitchens, bold mandi spots, cafe favorites, and relaxed pizza nights.</p>
+</section>
+
+<div class="menu-items showcase-grid">
+    {% for rest in restaurants %}
+    <article class="item">
+        <img src="{{ rest.image.url }}" alt="{{ rest.name }}">
+        <h3>{{ rest.name }}</h3>
+        <p class="meta">{{ rest.cuisine }}{% if rest.location %} &bull; {{ rest.location }}{% endif %}</p>
+        <p>{{ rest.description|slice:":100" }}...</p>
+        <a href="{% url 'book_table' %}">Book Table</a>
+    </article>
+    {% empty %}
+    <article class="item">
+        <img src="{% static 'images/udupi.jpg' %}" alt="Udupi Garden">
+        <h3>Udupi Garden</h3>
+        <p class="meta">South Indian &bull; Bengaluru</p>
+        <p>Delicious South Indian cuisine served fresh for family-style dining.</p>
+        <a href="{% url 'book_table' %}">Book Table</a>
+    </article>
+    <article class="item">
+        <img src="{% static 'images/soofi.jpg' %}" alt="Soofi Mandi">
+        <h3>Soofi Mandi</h3>
+        <p class="meta">Mandi &bull; Bengaluru</p>
+        <p>Fragrant rice, tender chicken, and generous platters for groups.</p>
+        <a href="{% url 'book_table' %}">Book Table</a>
+    </article>
+    <article class="item">
+        <img src="{% static 'images/ramesggg.jpg' %}" alt="Rameshwaram Cafe">
+        <h3>Rameshwaram Cafe</h3>
+        <p class="meta">Breakfast &bull; Bengaluru</p>
+        <p>Sumptuous South Indian breakfast classics with quick service.</p>
+        <a href="{% url 'book_table' %}">Book Table</a>
+    </article>
+    <article class="item">
+        <img src="{% static 'images/onesta.jpg' %}" alt="Onesta">
+        <h3>Onesta</h3>
+        <p class="meta">Pizza &bull; Bengaluru</p>
+        <p>The city's relaxed pizza table for slices, celebrations, and friends.</p>
+        <a href="{% url 'book_table' %}">Book Table</a>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

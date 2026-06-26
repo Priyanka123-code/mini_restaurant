@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+<section class="page-hero compact-hero contact-hero">
+    <p class="eyebrow">Contact</p>
+    <h1>We are here for reservations and questions.</h1>
+    <p>Reach out for table help, chef booking support, or restaurant details.</p>
+</section>
+
+<section class="contact-layout">
+    <div class="contact-card">
+        <img src="{% static 'images/email.jpg' %}" alt="Contact desk">
+        <h2>Mini Restaurant</h2>
+        <p>Email: <a href="mailto:priyankaspriyanka390@gmail.com">priyankaspriyanka390@gmail.com</a></p>
+        <p>Phone: <a href="tel:9606792780">9606792780</a></p>
+        <p>Address: Gottigere, Bannerghatta Road, Bengaluru</p>
+        <div class="social-row">
+            <a href="tel:9606792780" class="icon-link call-icon" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+            <a href="mailto:sinchana2919@gmail.com" class="icon-link email-icon" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/" class="icon-link linkedin-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/" class="icon-link instagram-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="contact-copy">
+        <p class="eyebrow">Support</p>
+        <h2>Questions about the website?</h2>
+        <p>If you have any questions concerning this website, policies, bookings, or listed restaurant information, contact us by email and our team will respond as soon as possible.</p>
+        <p>Mini Restaurant values guest trust and respects intellectual property. If you believe any material needs review, please write to the contact email with details.</p>
+    </div>
+</section>
+{% endblock %}

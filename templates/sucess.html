@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Booking Confirmed{% endblock %}
+
+{% block content %}
+<div class="alert success-card">
+    <p class="eyebrow">Confirmed</p>
+    <h2>Congratulations!</h2>
+    <h3>Your booking has been confirmed.</h3>
+    <p>Thank you for choosing Mini Restaurant.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Chef{% endblock %}
+
+{% block content %}
+<section class="page-hero compact-hero chef-hero">
+    <p class="eyebrow">Chef booking</p>
+    <h1>Book {{ chef.name }}.</h1>
+    <p>{{ chef.signature_dish }} specialist for a private dining experience.</p>
+</section>
+
+<div class="form-shell">
+    <form method="POST" class="form-card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Confirm Chef Booking</button>
+    </form>
+</div>
+{% endblock %}
