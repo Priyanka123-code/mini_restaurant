@@ -12,7 +12,11 @@
 <div class="menu-items showcase-grid">
     {% for rest in restaurants %}
     <article class="item">
+        {% if rest.image %}
         <img src="{{ rest.image.url }}" alt="{{ rest.name }}">
+        {% else %}
+        <img src="{% static rest.default_image %}" alt="{{ rest.name }}">
+        {% endif %}
         <h3>{{ rest.name }}</h3>
         <p class="meta">{{ rest.cuisine }}{% if rest.location %} &bull; {{ rest.location }}{% endif %}</p>
         <p>{{ rest.description|slice:":100" }}...</p>

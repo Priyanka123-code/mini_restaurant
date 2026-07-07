@@ -9,6 +9,16 @@ class Restaurant(models.Model):
     location = models.CharField(max_length=200)
     cuisine = models.CharField(max_length=100)
 
+    @property
+    def default_image(self):
+        images = {
+            "Udupi Garden": "images/udupi.jpg",
+            "Soofi Mandi": "images/soofi.jpg",
+            "Rameshwaram Cafe": "images/ramesggg.jpg",
+            "Onesta": "images/onesta.jpg",
+        }
+        return images.get(self.name, "images/udupi.jpg")
+
     def __str__(self):
         return self.name
 
@@ -20,6 +30,16 @@ class Chef(models.Model):
     email = models.EmailField()
     image = models.ImageField(upload_to='chefs/')
     bio = models.TextField(blank=True)
+
+    @property
+    def default_image(self):
+        images = {
+            "Chef Sanjeev Kapoor": "images/san.jpeg",
+            "Chef Venkatesh Bhatt": "images/venkatesh.avif",
+            "Chef Ranveer Brar": "images/brar.jpg",
+            "Chef Koushik S. A.K.A.": "images/Chef Koushik.jpg",
+        }
+        return images.get(self.name, "images/san.jpeg")
 
     def __str__(self):
         return self.name

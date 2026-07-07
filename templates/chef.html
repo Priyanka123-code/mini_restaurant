@@ -12,7 +12,11 @@
 <div class="content-page showcase-grid">
     {% for chef in chefs %}
     <article class="container1">
+        {% if chef.image %}
         <img src="{{ chef.image.url }}" alt="{{ chef.name }}">
+        {% else %}
+        <img src="{% static chef.default_image %}" alt="{{ chef.name }}">
+        {% endif %}
         <h3>{{ chef.name }}</h3>
         <p class="meta">{{ chef.cuisine }}</p>
         <p><strong>Signature:</strong> {{ chef.signature_dish }}</p>
