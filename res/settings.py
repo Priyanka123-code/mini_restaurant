@@ -10,25 +10,47 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','django-insecure-m#$kq4nqs%)y#y-g#b#zve7y#))7vvel2+(8udoywq7jeuo$=)')
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    os.environ.get(
+        "SECRET_KEY",
+        "django-insecure-m#$kq4nqs%)y#y-g#b#zve7y#))7vvel2+(8udoywq7jeuo$=)",
+    ),
+)
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 
-ALLOWED_HOSTS = ['mini-res-app.onrender.com','localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        "ALLOWED_HOSTS",
+        "mini-restaurant.onrender.com,mini-res-app.onrender.com,localhost,127.0.0.1",
+    ).split(",")
+    if host.strip()
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://mini-restaurant.onrender.com,https://mini-res-app.onrender.com",
+    ).split(",")
+    if origin.strip()
+]
 
 
 # Application definition
@@ -43,9 +65,11 @@ INSTALLED_APPS = [
     'res_app',
 ]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,16 +101,42 @@ WSGI_APPLICATION = 'res.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": os.environ.get("DB_HOST"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
+DATABASE_URL = os.environ.get("DATABASE_URL")
+HAS_POSTGRES_PARTS = all(
+    os.environ.get(name)
+    for name in ("DB_NAME", "DB_USER", "DB_PASSWORD", "DB_HOST", "DB_PORT")
+)
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=not DEBUG,
+        )
     }
-}
+elif HAS_POSTGRES_PARTS:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ["DB_NAME"],
+            "USER": os.environ["DB_USER"],
+            "PASSWORD": os.environ["DB_PASSWORD"],
+            "HOST": os.environ["DB_HOST"],
+            "PORT": os.environ["DB_PORT"],
+            "OPTIONS": {"sslmode": "require"} if not DEBUG else {},
+        }
+    }
+elif os.environ.get("RENDER"):
+    raise ImproperlyConfigured("DATABASE_URL or DB_* PostgreSQL settings are required on Render.")
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -124,11 +174,19 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',           # This should work now
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
