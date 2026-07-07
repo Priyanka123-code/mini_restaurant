@@ -34,6 +34,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 
+
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get(

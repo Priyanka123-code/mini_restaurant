@@ -51,7 +51,7 @@ background: linear-gradient(to right,
 .hero {
     text-align: center;
     padding: 20px 20px;
-    background: url("C:\Users\Dell\OneDrive\Desktop\miniproject\IMG_1259.webp") no-repeat center center/cover;
+    background: url("../images/IMG_1259.webp") no-repeat center center/cover;
     color: white;
 }
 
